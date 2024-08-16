@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { client } from '../api/Axios';
+import './page.css';
 
 interface RpsGameType{
   userData:string;
@@ -63,8 +64,8 @@ const RpsGamePage:React.FC = () => {
 
   return (
     <>
-      <section className="flex justify-center items-center min-h-screen">
-        <div className='grid grid-row sm:grid-cols-3'>
+      <section className="flex justify-center  items-center min-h-screen">
+        <div className='grid grid-row sm:grid-cols-3 place-items-center'>
 
           <div className='border-solid border-2 border-black text-center mx-20'>
             {!userImg?.isVisible ? <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png"/> : <img src={userImg.src}/> }
@@ -100,7 +101,7 @@ const RpsGamePage:React.FC = () => {
           <div className='border-solid border-2 border-black text-center mx-20'>
           {!computerImg?.isVisible ? <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png"/> : <img src={computerImg.src}/> }
             <p>컴퓨터</p>
-            <p className='text-black my-2'>{computerPick}</p>
+            <p className='text-white bg-blue-700 rounded-lg'>{computerPick}</p>
           </div>
           
         </div>
