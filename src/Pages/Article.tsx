@@ -1,7 +1,10 @@
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { client } from '../api/Axios';
+import { editorLanguage } from './ArticleCreate';
 import { BoardType } from './Board';
 
 interface ParamType {
@@ -10,6 +13,7 @@ interface ParamType {
 
 const Article: React.FC = () => {
     const [article, setArticle] = useState<BoardType>();
+    const [editorData, setEditorData] = useState<string>('');
     const [updateArticle, setUpdateArticle] = useState<BoardType>({
         title: '',
         nickname: '',
@@ -23,6 +27,7 @@ const Article: React.FC = () => {
             try {
                 const response = await client.get(url);
                 setArticle(response.data);
+                setEditorData(response.data.content)
                 setUpdateArticle({
                     title: response.data.title,
                     nickname: response.data.nickname,
@@ -42,7 +47,7 @@ const Article: React.FC = () => {
         const articleData = {
             title: formData.get('title') as string,
             nickname: formData.get('nickname') as string,
-            content: formData.get('content') as string,
+            content: editorData
         };
 
         console.log(articleData);
@@ -94,12 +99,14 @@ const Article: React.FC = () => {
                             : `${dayjs(article?.updateTime).format('YYYY.MM.DD.HH.mm')} 수정됨`}
                     </div>
                     <div className="mb-6">
-                        <input
-                            type="text"
-                            name="content"
-                            defaultValue={article?.content}
-                            className="w-full h-64 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            placeholder="내용을 입력하세요"
+                        <CKEditor
+                        editor={ClassicEditor}
+                        data={editorData}
+                        config={editorLanguage}
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setEditorData(data);
+                        }}
                         />
                     </div>
                     <div className="text-right">

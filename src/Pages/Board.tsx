@@ -89,7 +89,7 @@ const Board: React.FC = () => {
             itemClass="px-3 py-2 border rounded-md bg-white text-blue-500 hover:bg-blue-500 hover:text-black"
             activeClass="bg-blue-500 text-black"
           />
-          <Link to="/board/create">
+          <Link to="/article/create">
             <button className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow hover:bg-blue-600 transition-colors duration-200">
               게시글 작성
             </button>
