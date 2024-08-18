@@ -3,16 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Pagination from 'react-js-pagination';
 import { Link } from 'react-router-dom';
 import { client } from '../api/Axios';
+import { BoardType } from '../types/type';
 
-export interface BoardType {
-  id?: number;
-  title: string;
-  nickname: string;
-  content: string;
-  hits?: number;
-  createTime?: string;
-  updateTime?: string;
-}
 
 const Board: React.FC = () => {
   const [boardList, setBoardList] = useState<BoardType[]>([]);
@@ -41,8 +33,11 @@ const Board: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if ( indexOfFirstPost < 0 ) {
+      return
+    }
     setCurrentPost(boardList.slice(indexOfFirstPost, indexofLastPost));
-  }, [boardList, page]);
+  }, [boardList, page, indexOfFirstPost, indexofLastPost]);
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
@@ -70,7 +65,7 @@ const Board: React.FC = () => {
                 </td>
                 <td className="py-4">{board.updateTime === null ?
                 dayjs(board.createTime).format('YYYY.MM.DD') :
-                dayjs(board.updateTime).format('YYYY.MM.DD' + " 수정")}</td>
+                dayjs(board.updateTime).format('YYYY.MM.DD 수정')}</td>
                 <td className="py-4">{board.nickname}</td>
               </tr>
             ))}
@@ -86,8 +81,8 @@ const Board: React.FC = () => {
             prevPageText="<"
             pageRangeDisplayed={5}
             innerClass="flex space-x-2"
-            itemClass="px-3 py-2 border rounded-md bg-white text-blue-500 hover:bg-blue-500 hover:text-black"
-            activeClass="bg-blue-500 text-black"
+            itemClass="px-3 py-2 border rounded-md text-black hover:bg-blue-500 hover:text-white"
+            activeClass="bg-sky-300 text-black"
           />
           <Link to="/article/create">
             <button className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow hover:bg-blue-600 transition-colors duration-200">

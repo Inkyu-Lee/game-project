@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { client } from '../api/Axios';
-import './page.css';
 
 interface RpsGameType{
   userData:string;
@@ -18,7 +17,7 @@ const RpsGamePage:React.FC = () => {
   const getSrcAdd = (target:string): string => {
   
     if(target === "가위"){
-      let src:string = "http://49.247.158.208:9999/hjs/img/scissor.f9ef898c.jpg"
+      let src:string = "http://49.247.158.208:9999/hjs/img/scissor.f9ef898c.jpg" 
       return src
     }
     if(target === "바위"){
@@ -68,7 +67,7 @@ const RpsGamePage:React.FC = () => {
         <div className='grid grid-row sm:grid-cols-3 place-items-center'>
 
           <div className='border-solid border-2 border-black text-center mx-20'>
-            {!userImg?.isVisible ? <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png"/> : <img src={userImg.src}/> }
+            {!userImg?.isVisible ? <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" alt="가위바위보"/> : <img src={userImg.src} alt="가위바위보"/> }
             <p>나</p>
             <p>{userPick}</p>
             <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-80'
@@ -93,15 +92,17 @@ const RpsGamePage:React.FC = () => {
           </div>
 
           <div className='border-solid border-2 border-black text-center mx-20'>
-            <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png"/>
+            <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" alt="가위바위보"/>
             <p>심판</p>
             <p>{winner}</p>
           </div>
 
           <div className='border-solid border-2 border-black text-center mx-20'>
-          {!computerImg?.isVisible ? <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png"/> : <img src={computerImg.src}/> }
+          {!computerImg?.isVisible ? <img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" alt="가위바위보"/> : <img src={computerImg.src} alt="가위바위보"/> }
             <p>컴퓨터</p>
-            <p className='text-white bg-blue-700 rounded-lg'>{computerPick}</p>
+            <div className='flex justify-center items-center'>
+              <p className='border-solid border-2 border-black w-32 h-12 my-3 text-2xl' >{computerPick}</p>
+            </div>
           </div>
           
         </div>

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
   return (
-    <nav className="bg-blue-600 p-4 shadow-lg">
+    <nav className="sticky top-0 w-full bg-blue-600 p-4 shadow-lg z-20">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white font-bold text-xl">
           <Link to="/">게임 사이트</Link>
@@ -11,6 +12,7 @@ const Navbar: React.FC = () => {
         <div className="space-x-4">
           <Link
             to="/"
+            onClick={() => navigate('/')}
             className="text-white hover:bg-blue-500 px-3 py-2 rounded-md"
           >
             Lotto

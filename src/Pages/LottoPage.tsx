@@ -23,7 +23,7 @@ const LottoPage:React.FC = () => {
         }, [])
 
   return (
-    <div className='flex justify-center items-center min-h-screen'>
+    <div className='flex justify-center items-center min-h-screen bg-blue-500'>
         <div className='grid grid-cols-6'>
             {lottoNum?.map((lotto, idx) =>
                 <div
